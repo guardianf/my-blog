@@ -3,14 +3,13 @@
     <div class="banner">
       <div>Fu Yubin</div>
       <ul class="row">
-        <li>Fu Yubin</li>
-        <li>首页</li>
-        <li>关于我</li>
-        <li>找我</li>
+        <li class="focus" name="home" @click="choose">首页</li>
+        <li name="about" @click="choose">关于我</li>
+        <li name="me" @click="choose">找我</li>
       </ul>
     </div>
     <div class="page first-page" ref="home">
-      <p>我叫傅裕彬,</p>
+      <p>我是傅裕彬,</p>
       <p>一只90年出生,</p>
       <p>不务正业的前端工程🦁️</p>
       <p class='flex-row'>
@@ -54,7 +53,6 @@ export default {
           if(i <= len) {
             const str = text.slice(0, i <= (len / 2) ? i : len - i);
             this.something = str;
-            console.log(str,i);
           } else {
             clearInterval(itl);
             index++;
@@ -66,6 +64,14 @@ export default {
         const itl = setInterval(itlFunc, inter);
       }
       itlTextFunc();
+    },
+    choose({ currentTarget }) {
+      const nodes = currentTarget.parentElement.childNodes;
+      for(let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        node.classList.remove('focus');
+      }
+      currentTarget.classList.add('focus');
     }
   }
 }
@@ -94,6 +100,10 @@ export default {
       & > * {
         padding: 0 10px;
         line-height: 20px;
+        font-size: 20px;
+        &.focus {
+          color: #e62200;
+        }
       }
     }
   }
@@ -114,15 +124,16 @@ export default {
   }
   .splitor {
     background-color: #000;
-    width: 3px;
-    height: 80%;
+    width: 4px;
+    margin-left: 4px;
+    height: 60%;
     visibility: visible;
     animation: twinkle 2s infinite;
   }
 }
 @keyframes twinkle {
   0% {
-    opacity:.0.8;
+    opacity: 0.8;
   }
   100%{
     opacity:0;
