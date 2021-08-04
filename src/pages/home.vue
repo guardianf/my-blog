@@ -41,7 +41,6 @@ export default {
           if(i <= len) {
             const str = text.slice(0, i <= (len / 2) ? i : len - i);
             this.something = str;
-            console.log(str,i);
           } else {
             clearInterval(itl);
             index++;

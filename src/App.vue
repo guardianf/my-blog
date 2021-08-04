@@ -3,10 +3,9 @@
     <div class="banner">
       <div>Fu Yubin</div>
       <ul class="row">
-        <li>Fu Yubin</li>
-        <li>首页</li>
-        <li>关于我</li>
-        <li>找我</li>
+        <li name="home" @click="choose">首页</li>
+        <li name="about" @click="choose">关于我</li>
+        <li name="me" @click="choose">找我</li>
       </ul>
     </div>
     <home ref='home' />
@@ -22,6 +21,10 @@ export default {
   name: 'App',
   components: { Home },
   methods: {
+    choose({ currentTarget }) {
+      const name = currentTarget.getAttribute('name');
+      console.log(this.$refs[name].$el);
+    }
   }
 }
 </script>
@@ -44,9 +47,12 @@ export default {
     .row {
       @extend .flex-row !optional;
       & > * {
-        padding: 0 10px;
+        margin: 0 10px;
         line-height: 20px;
       }
+    }
+    ul > li {
+      cursor: pointer;
     }
   }
 }
