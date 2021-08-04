@@ -8,18 +8,22 @@
         <li name="me" @click="choose">找我</li>
       </ul>
     </div>
-    <home ref='home' />
-    <!-- <div class="page" style="background-color: blue"></div>
-    <div class="page" style="background-color: green"></div> -->
+    <home ref="home" />
+    <about ref="about" />
+    <!-- <div class="page" style="background-color: green"></div> -->
   </div>
 </template>
 
 <script>
 import Home from '@/pages/home';
+import About from '@/pages/about';
 
 export default {
   name: 'App',
-  components: { Home },
+  components: { 
+    Home,
+    About
+  },
   methods: {
     choose({ currentTarget }) {
       // change styles
@@ -44,6 +48,7 @@ export default {
 #app {
   .banner {
     @extend .flex-row !optional;
+    z-index: 1;
     height: 70px;
     box-shadow: rgba($color: #000000, $alpha: 0.2) 0px 0px 3px 2px;
     padding: 0 20px;
