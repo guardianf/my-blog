@@ -3,7 +3,7 @@
     <div class="banner">
       <div>Fu Yubin</div>
       <ul class="row">
-        <li name="home" @click="choose">首页</li>
+        <li class="focus" name="home" @click="choose">首页</li>
         <li name="about" @click="choose">关于我</li>
         <li name="me" @click="choose">找我</li>
       </ul>
@@ -22,6 +22,15 @@ export default {
   components: { Home },
   methods: {
     choose({ currentTarget }) {
+      // change styles
+      const nodes = currentTarget.parentElement.childNodes;
+      for(let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        node.classList.remove('focus');
+      }
+      currentTarget.classList.add('focus');
+
+      // logical
       const name = currentTarget.getAttribute('name');
       console.log(this.$refs[name].$el);
     }
@@ -49,10 +58,15 @@ export default {
       & > * {
         margin: 0 10px;
         line-height: 20px;
+        font-size: 20px;
+        &.focus {
+          color: #e62200;
+        }
       }
     }
     ul > li {
       cursor: pointer;
+      user-select: none;
     }
   }
 }
