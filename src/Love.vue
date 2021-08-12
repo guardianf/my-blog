@@ -1,0 +1,139 @@
+<template>
+  <div class="full-screen flex row-center col-center">
+    <div class="flex column" id="login" v-if="!isLogin">
+      <h2 style="margin-bottom: 20px">恋爱系统登录</h2>
+      <span>用户名：</span><input v-model="bride" placeholder="请输入自己的真名">
+      <span>密码：</span><input v-model="bridegroom" placeholder="请输入你老公的真名">
+      <span v-if="errorMessage !==''" class="errorMessage">{{errorMessage}}</span>
+      <button type="button" name="button" @click="login">登陆</button>
+    </div>
+    <div v-else class="flex">
+      <!-- 表白内容-S -->
+        <div style="margin: 2em;">
+          <div class="Info">亲爱的 张岚，</div>
+          <div class="Info-small">我们认识到现在已经<span class="Info">{{meetingDays}}</span>了</div>
+          <div class="Info-small">谈恋爱已经<span class="Info">{{datingDays}}</span>了</div>
+          <div class="Info-small">这是我们婚前的最后一个七夕节。我就是个程序员不知道送啥，干脆就写个页面送给你吧。💋 </div>
+          <div class="Info-small">老婆，我爱你 </div>
+        </div>
+      <!-- 表白内容-E -->
+    </div>
+    <heart v-if="isLogin" class="bg" />
+  </div>
+</template>
+
+<script>
+import Heart from './pages/Heart';
+
+export default {
+  name: 'Love',
+  components: {
+    Heart
+  },
+  data() {
+    return {
+      bride: '',
+      bridegroom: '',
+      errorMessage: '',
+      isLogin: false,
+      meetingDate: new Date('2020-05-13T20:06:00'),
+      datingDate: new Date('2020-06-03T21:15:00'),
+      date: new Date(),
+    };
+  },
+  created() {
+    setInterval(() => {
+      this.date = new Date();
+    },1000);
+  },
+  computed: {
+    meetingDays() {
+      const days_timestamp =  this.date.getTime() - this.meetingDate.getTime();
+      const time = (days_timestamp / 1000 / (24 * 60 * 60));// 天
+      const days = Math.floor(time);// 天
+      const hours = Math.floor((time - days) * 24);
+      const minutes = Math.floor((time - days - hours / 24) * 60 * 24);
+      const seconds = Math.floor((time - days - hours / 24 - minutes / 24 / 60) * 60 * 60 * 24);
+      return `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+    },
+    datingDays() {
+      const days_timestamp =  this.date.getTime() - this.datingDate.getTime();
+      const time = (days_timestamp / 1000 / (24 * 60 * 60));// 天
+      const days = Math.floor(time);// 天
+      const hours = Math.floor((time - days) * 24);
+      const minutes = Math.floor((time - days - hours / 24) * 60 * 24);
+      const seconds = Math.floor((time - days - hours / 24 - minutes / 24 / 60) * 60 * 60 * 24);
+      return `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+    }
+  },
+  methods: {
+    login() {
+      if(this.bride === '张岚' && this.bridegroom === '傅裕彬') {
+        this.isLogin = true
+      } else if(this.bride === '张岚') {
+        this.errorMessage = "你不爱我了么？🥺 "
+      } else if(this.bridegroom === '傅裕彬') {
+        this.errorMessage = "你是谁啊！😠 "
+      } else {
+        this.errorMessage ="滚😡 "
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.full-screen {
+  height: 100vh;
+  width: 100%;
+  input, button {
+    height: 30px;
+    outline: none;
+    padding-left: 8px;
+  }
+  #login {
+    $space: 20px;
+    width: 300px - 2*$space;
+    height: 400px - 2*$space;
+    box-shadow: #e2e2e2 0 0 2px 1px;
+    padding: $space;
+    & > * {
+      margin: 8px 0;
+    }
+  }
+}
+.flex {
+  display: flex;
+  &.column {
+    flex-flow: column;
+  }
+  &.row {
+    flex-flow: row;
+  }
+  &.row-center {
+    justify-content: center;
+  }
+  &.col-center {
+    align-items: center;
+  }
+}
+.errorMessage {
+  color: red;
+}
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+$fontColor: hsla(0, 100%, 60%, 1);
+.Info {
+  color: $fontColor;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.Info-small {
+  color: $fontColor;
+  font-size: 1em;
+}
+</style>
