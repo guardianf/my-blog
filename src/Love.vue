@@ -1,5 +1,5 @@
 <template>
-  <div class="full-screen flex row-center col-center">
+  <div class="full-screen flex row-center col-center" v-if="enabled">
     <div class="flex column" id="login" v-if="!isLogin">
       <h2 style="margin: .5em;text-align: center;">💗恋爱系统登录💗</h2>
       <div class="content">
@@ -72,6 +72,9 @@ export default {
       const minutes = Math.floor((time - days - hours / 24) * 60 * 24);
       const seconds = Math.floor((time - days - hours / 24 - minutes / 24 / 60) * 60 * 60 * 24);
       return `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+    },
+    enabled() {
+      return this.date > new Date('2021-08-14') ? true : false;
     }
   },
   methods: {
