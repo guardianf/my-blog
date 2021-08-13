@@ -26,6 +26,9 @@
     </div>
     <heart v-if="isLogin" class="bg" />
   </div>
+  <div v-else class="full-screen flex row-center col-center">
+    <div>系统开启倒计时:{{ countingDown }}</div>
+  </div>
 </template>
 
 <script>
@@ -46,6 +49,7 @@ export default {
       meetingDate: new Date('2020-05-13T20:06:00'),
       datingDate: new Date('2020-06-03T21:15:00'),
       datingDay: '2020-06-03',
+      sevenFes: '2021-08-14T00:00:00',
       date: new Date(),
     };
   },
@@ -73,8 +77,17 @@ export default {
       const seconds = Math.floor((time - days - hours / 24 - minutes / 24 / 60) * 60 * 60 * 24);
       return `${days}天${hours}小时${minutes}分钟${seconds}秒`;
     },
+    countingDown() {
+      const days_timestamp =  (new Date(this.sevenFes)).getTime() - this.date.getTime();
+      const time = (days_timestamp / 1000 / (24 * 60 * 60));// 天
+      const days = Math.floor(time);// 天
+      const hours = Math.floor((time - days) * 24);
+      const minutes = Math.floor((time - days - hours / 24) * 60 * 24);
+      const seconds = Math.floor((time - days - hours / 24 - minutes / 24 / 60) * 60 * 60 * 24);
+      return `${days}天${hours}小时${minutes}分钟${seconds}秒`;
+    },
     enabled() {
-      return this.date > new Date('2021-08-14') ? true : false;
+      return this.date > new Date(this.sevenFes) ? true : false;
     }
   },
   methods: {
