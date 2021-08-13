@@ -8,14 +8,69 @@
     </div>
     <div class="timeline">
       <div class="content">
-        <div class="date">2012-06</div>
-        <div class="desc">上海理工大学</div>
+        <div class="desc">平时看📖 学习<br>周末💃</div>
       </div>
     </div>
     <div class="timeline">
       <div class="content">
         <div class="date">2011-12</div>
-        <div class="desc">华东师范大学🎓</div>
+        <div class="desc">
+          🎓 辅修专业
+          <br>
+          <img class="logo" src="~@/assets/images/ecnu.png" alt="">
+          <br>
+          英语@华东师范大学
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="content">
+        <div class="date">2012-06</div>
+        <div class="desc">
+          <img class="logo" src="~@/assets/images/usst.png" alt="">
+          <br>
+          网络工程@上海理工大学
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="content">
+        <div class="date">2012-07</div>
+        <div class="desc">
+          <br>
+          开始了软件🐒 的日子
+          软件开发工程师@上海众大新技术发展有限公司
+          <ul>
+            <li>CRM客户回访系统</li>
+            <li>众大修理管理软件</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="content">
+        <div class="date">2014-04</div>
+        <div class="desc">
+          <br>
+          开始写前端啦～
+          <br>
+          前端开发组长@上海智强信息服务有限公司
+          <ul>
+            <li>AquaPaaS</li>
+            <li>AquaBO</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="content">
+        <div class="date">2021-03</div>
+        <div class="desc">
+          高级前端开发@上海非夕机器人股份有限公司
+          <ul>
+            <li>Client Cloud Service</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -70,6 +125,10 @@ $timeLineColor: red;
     margin-right: 50%;
     text-align: right;
     justify-content: start;
+  }
+  .logo {
+    height: 50px;
+    width: 50px;
   }
 }
 </style>
