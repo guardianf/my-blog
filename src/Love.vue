@@ -1,11 +1,17 @@
 <template>
   <div class="full-screen flex row-center col-center">
     <div class="flex column" id="login" v-if="!isLogin">
-      <h2 style="margin-bottom: 20px">恋爱系统登录</h2>
-      <span>用户名：</span><input v-model="bride" placeholder="请输入自己的真名">
-      <span>密码：</span><input v-model="bridegroom" placeholder="请输入你老公的真名">
-      <span v-if="errorMessage !==''" class="errorMessage">{{errorMessage}}</span>
-      <button type="button" name="button" @click="login">登陆</button>
+      <h2 style="margin: .5em;text-align: center;">💗恋爱系统登录💗</h2>
+      <div class="content">
+        <span class="space-between">👩<input v-model="bride" placeholder="请输入自己的姓名"></span>
+        <span class="space-between">👨<input v-model="bridegroom" placeholder="请输入你老公的姓名"></span>
+        <span class="space-between">🔑<input v-model="firstDate" placeholder="成为男女朋友的日子" type="date"></span>
+        <span v-if="errorMessage !==''" class="errorMessage">{{errorMessage}}</span>
+        <div class="login-btn">
+          <span style="margin-left: auto;margin-right: auto;" @click="login">❤️ </span>
+          <span class="tip">⬆️ 点击这里登陆</span>
+        </div>
+      </div>
     </div>
     <div v-else class="flex">
       <!-- 表白内容-S -->
@@ -34,10 +40,12 @@ export default {
     return {
       bride: '',
       bridegroom: '',
+      firstDate: null,
       errorMessage: '',
       isLogin: false,
       meetingDate: new Date('2020-05-13T20:06:00'),
       datingDate: new Date('2020-06-03T21:15:00'),
+      datingDay: '2020-06-03',
       date: new Date(),
     };
   },
@@ -68,12 +76,14 @@ export default {
   },
   methods: {
     login() {
-      if(this.bride === '张岚' && this.bridegroom === '傅裕彬') {
+      if(this.bride === '张岚' && this.bridegroom === '傅裕彬' && this.firstDate === this.datingDay) {
         this.isLogin = true
-      } else if(this.bride === '张岚') {
-        this.errorMessage = "你不爱我了么？🥺 "
-      } else if(this.bridegroom === '傅裕彬') {
+      } else if(this.bride !== '张岚') {
         this.errorMessage = "你是谁啊！😠 "
+      } else if(this.bridegroom !== '傅裕彬') {
+        this.errorMessage = "你不爱我了么？🥺 "
+      } else if(this.firstDate !== this.datingDay) {
+        this.errorMessage = "好！你不记得了！😫 "
       } else {
         this.errorMessage ="滚😡 "
       }
@@ -91,15 +101,46 @@ export default {
     outline: none;
     padding-left: 8px;
   }
+  input {
+    width: 220px;
+  }
   #login {
     $space: 20px;
     width: 300px - 2*$space;
-    height: 400px - 2*$space;
+    height: 350px - 2*$space;
     box-shadow: #e2e2e2 0 0 2px 1px;
     padding: $space;
-    & > * {
+    .content {
+      flex: 1;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+    }
+    .content > * {
+      display: flex;
       margin: 8px 0;
     }
+    .tip {
+      position: absolute;
+      left: calc(50% - 8px);
+      top: 25px;
+      animation: blink 2s linear 1s infinite alternate none running;
+    }
+    .login-btn {
+      text-align: center;
+      position: relative;
+    }
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 .flex {
@@ -116,6 +157,9 @@ export default {
   &.col-center {
     align-items: center;
   }
+}
+.space-between {
+  justify-content: space-between;
 }
 .errorMessage {
   color: red;

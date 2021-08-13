@@ -8,7 +8,7 @@ module.exports = {
       // page 的入口
       entry: 'src/love.js',
       // 模板来源
-      template: 'public/index.html',
+      template: 'public/love.html',
       // 在 dist/index.html 的输出
       filename: 'love.html',
       // 当使用 title 选项时，
